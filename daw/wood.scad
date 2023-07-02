@@ -74,3 +74,41 @@ module mortised4x4(length) {
 /*color("#3434bc")*/
 /*translate([0, 0, 100])*/
 /*tenon(10, 10, 10);*/
+// easy rotation
+
+module mrotate(
+  rotation = [0, 0, 0], 
+  origin = [0, 0, 0],
+) {
+  translate(origin)
+  rotate(rotation)
+  translate(-origin)
+  children();
+}
+module crossbar(length) {
+  cube([length, fourby, fourby]);
+}
+module leg(length) {
+  cube([fourby, fourby, length]);
+}
+module support(length) {
+  cube([fourby, length, fourby]);
+}
+module shelf(w, l) {
+  union() {
+    plywoodhalf(l, w);
+    rotate([0, 90, 0])
+    translate([-onehalf-twoby, 0, 0])
+    onebytwo(w);
+  }
+}
+
+module shelfHD(w, l) {
+  mrotate([0, 0, 90])
+  union() {
+    plywood3quarters(w, l);
+    rotate([0, 90, 0])
+    translate([-threequarters-twoby, 0, 0])
+    onebytwo(l);
+  }
+}
