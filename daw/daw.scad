@@ -16,32 +16,15 @@ midi_pedal_keyboard_height = 13 * inch;
 
 
 module base() {
+  color("#a3d888")
   union() {
-    translate([(depth / 2), 0, 0])
-    fourbyfour(width);
-    rotate([0, 0, -90])
-    translate([-fourby, 0, 0])
-    fourbyfour(depth);
+    translate([fourby/2, fourby / 2, fourby])
+    plywoodhalf(depth / 2 - fourby, width - fourby);
     translate([0, 0, twoby])
-    twobyfour(width);
-    translate([depth, 0, 0])
+    rotate([0, 0, 0])
+    twobytwo(width);
+    translate([depth/2, 0, fourby])
     fourbyfour(width);
-    rotate([0, 0, -90])
-    translate([-width, 0, 0])
-    fourbyfour(depth);
-    // pedal board top
-    // TODO - add cutouts for cables, etc.
-    translate([0, 0, fourby])
-    plywoodhalf(depth / 2, width);
-    rotate([0, 0, -90])
-    translate([-width / 3, 0, 0])
-    fourbyfour(depth);
-    rotate([0, 0, -90])
-    translate([-width / 3 * 2, 0, 0])
-    fourbyfour(depth);
-    translate([0, 0, fourby])
-    rotate([0, 90, 0])
-    twobyfour(width);
   }
 }
 

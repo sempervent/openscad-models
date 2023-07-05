@@ -41,11 +41,15 @@ module leg() {
 
 module back_legs() {
     leg();
-    translate([fourby, -fourby, height / 2])
+    translate([fourby, -fourby, height / 2 + 3.5 * fourby])
+    crossbar(middle);
+    translate([fourby, -fourby, fourby * 2])
     crossbar(middle);
     translate([middle, 0, 0])
     leg();
-    translate([middle, -fourby, height / 2])
+    translate([middle, -fourby, height / 2 + 2 *  fourby])
+    crossbar(length - middle);
+    translate([middle, -fourby, fourby])
     crossbar(length - middle);
     translate([length - fourby, 0, 0])
     leg();
@@ -57,21 +61,40 @@ module front_legs() {
     leg();
     translate([length - fourby, 0, 0])
     leg();
+    translate([0, -fourby, fourby * 2])
+    crossbar(middle);
+    translate([0, -fourby, height - fourby * 2])
+    crossbar(middle);
+    translate([middle, -fourby, height / 2 + 2 * fourby])
+    crossbar(length - middle);
+    translate([middle, -fourby, fourby])
+    crossbar(length - middle);
 }
 
 module legs() {
+  union() {
     front_legs();
     translate([0, width - fourby, 0])
     back_legs();
-    translate([fourby, -fourby, height / 2])
+    translate([fourby, -fourby, height - 5 * fourby])
     rotate([0, 0, 90])
     crossbar(width);
-    translate([length, -fourby, height / 2])
+    translate([fourby, -fourby, fourby])
     rotate([0, 0, 90])
     crossbar(width);
-    translate([middle + fourby, -fourby, height / 2])
+    translate([length, -fourby, height - 5 * fourby])
     rotate([0, 0, 90])
     crossbar(width);
+    translate([length, -fourby, fourby])
+    rotate([0, 0, 90])
+    crossbar(width);
+    translate([middle + fourby, -fourby, height - 5 * fourby])
+    rotate([0, 0, 90])
+    crossbar(width);
+    translate([middle + fourby, -fourby, fourby])
+    rotate([0, 0, 90])
+    crossbar(width);
+  }
 }
 
 module bottom_shelf() {
@@ -85,12 +108,12 @@ module printer_shelf() {
 
 module cricut_shelf() {
     cube([length - middle, 15 * inch, oneby]);
-    //rotate([90, 0, 0])
-    //translate([0, -height + 18 * inch, -oneby])
-    //twobytwo(height - 18 * inch);
-    //rotate([90, 0, 0])
-    //translate([length - middle - oneby, -height + 18 * inch, -oneby])
-    //twobytwo(height - 18 * inch);
+    rotate([90, 0, 0])
+    translate([0, -height + 18 * inch, -oneby])
+    twobytwo(height - 18 * inch);
+    rotate([90, 0, 0])
+    translate([length - middle - oneby, -height + 18 * inch, -oneby])
+    twobytwo(height - 18 * inch);
 }
     
 module table() {
